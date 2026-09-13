@@ -127,8 +127,53 @@ def inject_modern_theme():
         padding: 15px 17px;
         box-shadow: 0 6px 20px rgba(17,30,25,.04);
     }
+
+    [data-testid="stMetric"] [data-testid="stMetricValue"] {
+        color: #101815 !important;
+        font-size: 1.65rem !important;
+        font-weight: 850 !important;
+        opacity: 1 !important;
+    }
     [data-testid="stMetricLabel"] {
-        color: #68736f !important;
+        color: #3f4b46 !important;
+        font-weight: 700 !important;
+    }
+
+    [data-testid="stMetricValue"],
+    [data-testid="stMetricValue"] * {
+        color: #101815 !important;
+        font-weight: 850 !important;
+        opacity: 1 !important;
+    }
+
+    [data-testid="stMetricDelta"],
+    [data-testid="stMetricDelta"] * {
+        color: #24302b !important;
+        opacity: 1 !important;
+        font-weight: 700 !important;
+    }
+
+    /* Make numbers and values darker on small/mobile screens */
+    @media (max-width: 700px) {
+        [data-testid="stMetricValue"],
+        [data-testid="stMetricValue"] * {
+            color: #080d0b !important;
+            font-weight: 900 !important;
+            opacity: 1 !important;
+            text-shadow: none !important;
+        }
+
+        [data-testid="stMetricLabel"],
+        [data-testid="stMetricLabel"] * {
+            color: #303b36 !important;
+            font-weight: 750 !important;
+            opacity: 1 !important;
+        }
+
+        .hf-service-name {
+            color: #101815 !important;
+            font-weight: 800 !important;
+        }
     }
     .stButton > button,
     .stFormSubmitButton > button {
