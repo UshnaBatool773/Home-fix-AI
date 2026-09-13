@@ -20,6 +20,162 @@ load_dotenv()
 
 GROQ_MODEL = os.getenv("GROQ_MODEL", "openai/gpt-oss-120b")
 
+def inject_modern_theme():
+    st.markdown("""
+    <style>
+    .stApp {
+        background:
+            radial-gradient(circle at 90% 0%, rgba(0,168,132,.10), transparent 28%),
+            radial-gradient(circle at 0% 20%, rgba(255,74,105,.08), transparent 25%),
+            #f7f8f6;
+        color: #17201d;
+    }
+    .block-container {
+        max-width: 1180px;
+        padding-top: 2rem;
+        padding-bottom: 3rem;
+    }
+    section[data-testid="stSidebar"] {
+        background: #101513;
+        border-right: 0;
+    }
+    section[data-testid="stSidebar"] * {
+        color: #f7faf8 !important;
+    }
+    section[data-testid="stSidebar"] .stRadio label {
+        border-radius: 12px;
+        padding: 7px 10px;
+    }
+    section[data-testid="stSidebar"] .stRadio label:hover {
+        background: rgba(255,255,255,.08);
+    }
+    h1, h2, h3 {
+        color: #111815 !important;
+        letter-spacing: -.03em;
+    }
+    .hf-hero {
+        background: linear-gradient(135deg, #0c1713 0%, #12352a 58%, #00a884 150%);
+        border-radius: 28px;
+        padding: 38px 40px;
+        color: white;
+        margin-bottom: 24px;
+        box-shadow: 0 18px 50px rgba(13,35,28,.15);
+        position: relative;
+        overflow: hidden;
+    }
+    .hf-hero:after {
+        content: "";
+        position: absolute;
+        width: 230px;
+        height: 230px;
+        border-radius: 50%;
+        right: -70px;
+        top: -90px;
+        background: rgba(255,255,255,.08);
+    }
+    .hf-eyebrow {
+        display: inline-block;
+        background: rgba(255,255,255,.13);
+        border: 1px solid rgba(255,255,255,.15);
+        border-radius: 999px;
+        padding: 7px 13px;
+        font-size: .78rem;
+        font-weight: 700;
+        margin-bottom: 15px;
+    }
+    .hf-hero-title {
+        font-size: clamp(2rem,5vw,3.5rem);
+        line-height: 1.03;
+        font-weight: 800;
+        margin: 0;
+        color: white;
+    }
+    .hf-hero-text {
+        color: rgba(255,255,255,.82);
+        font-size: 1.05rem;
+        max-width: 650px;
+        margin-top: 14px;
+    }
+    .hf-section {
+        font-size: 1.15rem;
+        font-weight: 800;
+        margin: 25px 0 12px;
+        color: #18221e;
+    }
+    .hf-service {
+        background: white;
+        border: 1px solid #e8ece9;
+        border-radius: 18px;
+        padding: 18px;
+        min-height: 112px;
+        box-shadow: 0 7px 24px rgba(17,30,25,.05);
+        transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .hf-icon {
+        font-size: 1.75rem;
+        margin-bottom: 7px;
+    }
+    .hf-service-name {
+        font-weight: 750;
+        font-size: .93rem;
+        color: #17201d;
+    }
+    [data-testid="stMetric"] {
+        background: white;
+        border: 1px solid #e6ebe8;
+        border-radius: 17px;
+        padding: 15px 17px;
+        box-shadow: 0 6px 20px rgba(17,30,25,.04);
+    }
+    [data-testid="stMetricLabel"] {
+        color: #68736f !important;
+    }
+    .stButton > button,
+    .stFormSubmitButton > button {
+        border-radius: 12px;
+        border: 1px solid #dfe6e2;
+        min-height: 44px;
+        font-weight: 700;
+        background: white;
+        color: #17201d;
+        transition: all .18s ease;
+    }
+    .stButton > button:hover,
+    .stFormSubmitButton > button:hover {
+        border-color: #00a884;
+        color: #00896d;
+        transform: translateY(-1px);
+        box-shadow: 0 7px 18px rgba(0,168,132,.12);
+    }
+    div[data-baseweb="input"] > div,
+    div[data-baseweb="select"] > div,
+    div[data-baseweb="textarea"] {
+        border-radius: 12px !important;
+        border-color: #dfe6e2 !important;
+        background: white !important;
+    }
+    div[data-testid="stVerticalBlockBorderWrapper"] {
+        border-radius: 18px !important;
+        border-color: #e4eae7 !important;
+        background: white;
+        box-shadow: 0 8px 25px rgba(17,30,25,.045);
+    }
+    .stAlert {
+        border-radius: 14px;
+    }
+    [data-testid="stDataFrame"] {
+        border-radius: 14px;
+        overflow: hidden;
+    }
+    @media (max-width: 700px) {
+        .block-container { padding: 1rem .8rem 2rem; }
+        .hf-hero { padding: 27px 23px; border-radius: 22px; }
+        .hf-hero-title { font-size: 2.2rem; }
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
+
 APP_DIR = Path(__file__).resolve().parent
 DATA_DIR = APP_DIR / "data"
 DATA_DIR.mkdir(exist_ok=True)
@@ -404,38 +560,79 @@ def render_provider_card(row, index):
             st.rerun()
 
 def home_page():
-    st.title("🏠 HomeFix AI")
-    st.markdown("### Tell us what's wrong. We'll help you find the right professional.")
-    st.info("This is a student project using fictional DEMO DATA for service providers.")
+    st.markdown("""
+    <div class="hf-hero">
+        <div class="hf-eyebrow">⚡ FAST • SIMPLE • LOCAL</div>
+        <div class="hf-hero-title">Home problems?<br>Get help, fast.</div>
+        <div class="hf-hero-text">
+            Tell HomeFix AI what is wrong. We'll understand the problem,
+            suggest the right professional, and help you send a service request.
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
 
     c1, c2, c3, c4 = st.columns(4)
     c1.metric("Services", "8")
     c2.metric("Demo Providers", "30")
     c3.metric("AI Matching", "✓")
-    c4.metric("Booking Requests", len(load_requests()))
+    c4.metric("Requests", len(load_requests()))
 
-    st.markdown("#### Try an example")
+    st.markdown('<div class="hf-section">What do you need help with?</div>', unsafe_allow_html=True)
+
+    services = [
+        ("❄️", "AC Technician", "Cooling, leakage & service"),
+        ("🚰", "Plumber", "Pipes, taps & drainage"),
+        ("⚡", "Electrician", "Lights, sockets & wiring"),
+        ("🔧", "Appliance Repair", "Fridge, washer & more"),
+        ("🧹", "Home Cleaner", "Deep & regular cleaning"),
+        ("🎨", "Painter", "Walls & home finishing"),
+        ("🪚", "Carpenter", "Furniture & woodwork"),
+        ("🔐", "Locksmith", "Locks, keys & doors"),
+    ]
+
+    cols = st.columns(4)
+    for i, (icon, name, desc) in enumerate(services):
+        with cols[i % 4]:
+            st.markdown(
+                f'''<div class="hf-service">
+                    <div class="hf-icon">{icon}</div>
+                    <div class="hf-service-name">{name}</div>
+                    <div style="font-size:.78rem;color:#77817d;margin-top:5px;">{desc}</div>
+                </div>''',
+                unsafe_allow_html=True
+            )
+            st.write("")
+            if st.button(f"Get {name}", key=f"home_service_{i}", use_container_width=True):
+                st.session_state.assistant_prompt = f"I need a {name.lower()}."
+                st.session_state.page = "💬 AI Assistant"
+                st.rerun()
+
+    st.markdown('<div class="hf-section">Try HomeFix AI</div>', unsafe_allow_html=True)
     examples = [
         "My AC is leaking water and not cooling.",
         "My kitchen sink is blocked.",
         "My washing machine is leaking.",
-        "I need an electrician.",
+        "I need an electrician for a broken switch.",
     ]
-    for example in examples:
-        if st.button(example, use_container_width=True):
-            st.session_state.assistant_prompt = example
-            st.session_state.page = "💬 AI Assistant"
-            st.rerun()
 
-    st.markdown("#### Available services")
-    cols = st.columns(4)
-    icons = ["❄️", "🚰", "⚡", "🔧", "🧹", "🎨", "🪚", "🔐"]
-    for i, service in enumerate(SERVICE_CATEGORIES):
-        cols[i % 4].write(f"{icons[i]} **{service}**")
+    cols = st.columns(2)
+    for i, example in enumerate(examples):
+        with cols[i % 2]:
+            if st.button(f"💬 {example}", key=f"example_{i}", use_container_width=True):
+                st.session_state.assistant_prompt = example
+                st.session_state.page = "💬 AI Assistant"
+                st.rerun()
+
+    st.markdown(
+        '<div style="text-align:center;color:#7b8581;font-size:.78rem;margin-top:30px;">'
+        'HomeFix AI • Student Project • Fictional demo provider data'
+        '</div>',
+        unsafe_allow_html=True
+    )
 
 def assistant_page():
-    st.title("💬 AI Assistant")
-    st.caption("Describe your home problem in natural language.")
+    st.markdown('<div class="hf-section" style="font-size:1.8rem;">💬 HomeFix AI Assistant</div>', unsafe_allow_html=True)
+    st.caption("Describe the problem in your own words. No technical terms needed.")
 
     if "chat_history" not in st.session_state:
         st.session_state.chat_history = []
@@ -500,7 +697,8 @@ def assistant_page():
                 render_provider_card(row, i)
 
 def find_professional_page():
-    st.title("🔧 Find a Professional")
+    st.markdown('<div class="hf-section" style="font-size:1.8rem;">🔧 Find a Professional</div>', unsafe_allow_html=True)
+    st.caption("Filter demo professionals by service, area and availability.")
     providers = load_providers()
 
     c1, c2, c3 = st.columns(3)
@@ -526,7 +724,8 @@ def find_professional_page():
             render_provider_card(row, i)
 
 def booking_page():
-    st.title("📅 My Service Request")
+    st.markdown('<div class="hf-section" style="font-size:1.8rem;">📅 My Service Request</div>', unsafe_allow_html=True)
+    st.caption("Send your request to the selected demo professional.")
 
     selected = st.session_state.get("selected_provider")
     if not selected:
@@ -598,7 +797,7 @@ def booking_page():
         st.info("Status: **Pending**. This demo does not automatically confirm appointments.")
 
 def dashboard_page():
-    st.title("📊 Dashboard")
+    st.markdown('<div class="hf-section" style="font-size:1.8rem;">📊 Dashboard</div>', unsafe_allow_html=True)
     requests = load_requests()
 
     if requests.empty:
@@ -641,7 +840,7 @@ def dashboard_page():
     st.dataframe(requests[display_cols], use_container_width=True, hide_index=True)
 
 def about_page():
-    st.title("ℹ️ About HomeFix AI")
+    st.markdown('<div class="hf-section" style="font-size:1.8rem;">ℹ️ About HomeFix AI</div>', unsafe_allow_html=True)
     st.markdown("""
 **HomeFix AI** is a student Generative AI + Business Analytics project.
 
@@ -679,18 +878,15 @@ def main():
         initial_sidebar_state="expanded",
     )
 
-    st.markdown("""
-    <style>
-    .main { background: #f7fafc; }
-    .stButton > button { border-radius: 10px; }
-    [data-testid="stMetric"] { border: 1px solid #e5e7eb; padding: 10px; border-radius: 12px; }
-    </style>
-    """, unsafe_allow_html=True)
+    inject_modern_theme()
 
     ensure_data_files()
 
-    st.sidebar.title("🏠 HomeFix AI")
-    st.sidebar.caption("AI Home Service Assistant")
+    st.sidebar.markdown(
+        '<div style="font-size:1.55rem;font-weight:800;letter-spacing:-.03em;">🏠 HomeFix</div>'
+        '<div style="color:#aab5b0;font-size:.78rem;margin-bottom:18px;">AI Home Service Assistant</div>',
+        unsafe_allow_html=True
+    )
     st.sidebar.warning("Provider data is fictional DEMO DATA.")
 
     pages = [
